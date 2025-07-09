@@ -1,0 +1,182 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    padding-top: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+h1 {
+    margin: 0;
+    color: #333;
+}
+
+#how-to-play-button {
+    position: absolute;
+    right: 30px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #7f8c8d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#game-container {
+    padding: 15px;
+    background-color: #d3d3d3;
+    border: 3px solid #808080;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #c0c0c0;
+    border: 2px inset #fff;
+}
+
+#mine-counter, #timer {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #000;
+    color: #00ff00;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#reset-button {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#game-board table {
+    border-collapse: collapse;
+}
+
+#game-board td {
+    width: 25px;
+    height: 25px;
+    border: 2px outset #fff;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #c0c0c0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#game-board td.revealed {
+    background-color: #e0e0e0;
+    border: 1px solid #a0a0a0;
+}
+
+td[data-adjacent="1"] { color: #0000ff; }
+td[data-adjacent="2"] { color: #008200; }
+td[data-adjacent="3"] { color: #ff0000; }
+td[data-adjacent="4"] { color: #000084; }
+td[data-adjacent="5"] { color: #840000; }
+td[data-adjacent="6"] { color: #008284; }
+td[data-adjacent="7"] { color: #840084; }
+td[data-adjacent="8"] { color: #757575; }
+
+#game-board td.mine { background-color: #ffcccc; }
+#game-board td.mine.exploded { animation: explode-animation 0.5s forwards; }
+#game-board td.flag { font-size: 16px; }
+
+@keyframes explode-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); background-color: red; }
+}
+
+/* --- オーバーレイとパネルのスタイル --- */
+.hidden {
+    display: none !important;
+}
+
+#game-end-overlay, #how-to-play-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#game-end-panel {
+    padding: 30px 50px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: drop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#how-to-play-panel {
+    padding: 20px 40px;
+    background: white;
+    border-radius: 10px;
+    max-width: 500px;
+}
+#how-to-play-panel h2 { margin-top: 0; }
+#how-to-play-panel ul { text-align: left; line-height: 1.6; }
+#how-to-play-panel button { float: right; margin-top: 10px; }
+
+
+#game-end-panel h2 {
+    font-size: 3em;
+    margin: 0 0 20px 0;
+    color: #e74c3c;
+}
+
+#game-end-panel[data-status="win"] h2 {
+    color: #2ecc71;
+}
+
+#play-again-button, #close-how-to-play {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+}
+
+@keyframes drop-in {
+    from {
+        transform: translateY(-200px) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
